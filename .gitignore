@@ -1,0 +1,59 @@
+# === Node ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# === Build Output ===
+dist/
+build/
+.next/
+out/
+.cache/
+.vercel/
+turbo/
+
+# === System Files ===
+.DS_Store
+Thumbs.db
+
+# === Env & Secrets ===
+.env*
+!.env.example
+
+# === Logs ===
+logs/
+*.log
+*.log.*
+
+# === IDEs ===
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# === Misc ===
+*.swp
+*.bak
+*.tmp
+*.old
+*.orig
+
+# === Coverage ===
+coverage/
+.nyc_output/
+
+# === Testing ===
+jest-html-reporters-*.html
+test-results/
+
+# === Mac-specific ===
+.AppleDouble
+.LSOverride
+
+# === Next.js Exported Static Files ===
+export/
+
+# === Optional for GitHub Codespaces ===
+.devcontainer/

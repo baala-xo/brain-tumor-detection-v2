@@ -1,66 +1,41 @@
-"use client"
+import BrainTumorUploader from "@/components/brain-tumor-uploader"
 
-import { useState } from "react"
-import axios from "axios"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+export default function Page() {
+return (
+  <main className="min-h-[100dvh] w-full flex items-center justify-center p-4">
+    <div className="w-full max-w-3xl">
+      <header className="mb-6">
+        <h1 className="text-3xl font-semibold tracking-tight">Brain Tumor Detection</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+  Upload a brain MRI image to get an AI-powered probabilistic prediction. This is a solo-built open-source project, and you're welcome to contribute—whether it’s <span className="font-medium">model tuning</span>, <span className="font-medium">UI</span>, or <span className="font-medium">backend engineering</span>.{' '}
+  <a
+    href="https://github.com/baala-xo/brain-tumor-detection-v2"
+    target="_blank"
+    rel="noreferrer"
+    className="font-medium underline underline-offset-4"
+  >
+    Contribute on GitHub
+  </a>{' '}
+  or try it out on{' '}
+  <a
+    href="https://huggingface.co/spaces/balaaa6414/brain-tumor-api"
+    target="_blank"
+    rel="noreferrer"
+    className="font-medium underline underline-offset-4"
+  >
+    Hugging Face Spaces
+  </a>
+  . Bring your PRs, benchmarks, or just come to vibe.
+</p>
 
-export default function HomePage() {
-  const [file, setFile] = useState<File | null>(null)
-  const [prediction, setPrediction] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
+<p className="mt-1 text-sm text-muted-foreground font-bold">
+  Note: This is a machine learning prediction. Always interpret results in a clinical context.
+</p>
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setFile(e.target.files[0])
-    }
-  }
+      </header>
 
-  const handleUpload = async () => {
-    if (!file) {
-      alert("Please select an image")
-      return
-    }
-
-    const formData = new FormData()
-    formData.append("file", file)
-
-    try {
-      setLoading(true)
-      setPrediction(null)
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/predict`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      )
-      setPrediction(res.data.prediction)
-    } catch (error) {
-      console.error(error)
-      alert("Prediction failed. Check console.")
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  return (
-    <Card className="w-full max-w-md shadow-lg">
-      <CardHeader>
-        <CardTitle className="text-xl font-bold">Brain Tumor Detection</CardTitle>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-4">
-        <Input type="file" accept="image/*" onChange={handleFileChange} />
-        <Button onClick={handleUpload} disabled={loading}>
-          {loading ? "Processing..." : "Upload & Predict"}
-        </Button>
-        {prediction && (
-          <div className="mt-4 p-3 bg-green-100 text-green-800 rounded-lg">
-            Prediction: {prediction}
-          </div>
-        )}
-      </CardContent>
-    </Card>
-  )
+      <BrainTumorUploader />
+    </div>
+  </main>
+)
 }
